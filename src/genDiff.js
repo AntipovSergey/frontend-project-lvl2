@@ -15,7 +15,7 @@ const genDiff = (file1, file2) => {
   const allKeys = _.union(keysFirst, keysSecond).sort();
   const result = {};
 
-  for (const key of allKeys) {
+  allKeys.forEach((key) => {
     if (_.has(firstObject, key) && _.has(secondObject, key)) {
       if (firstObject[key] === secondObject[key]) {
         result[`  ${[key]}`] = firstObject[key];
@@ -28,7 +28,7 @@ const genDiff = (file1, file2) => {
     } else if (!_.has(firstObject, key) && _.has(secondObject, key)) {
       result[`+ ${[key]}`] = secondObject[key];
     }
-  }
+  });
 
   console.log(`{\n${Object.entries(result).map((item) => `  ${item.join(': ')}`).join('\n')}\n}`);
 };
