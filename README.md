@@ -13,8 +13,8 @@ Utility Features:
 
 1. Support for different input formats: yaml, json
 2. Generating a report in the form of:
-    * Plain text
-    * Stylish 
+    * plain text
+    * stylish 
     * JSON
 
 Workflow badges
