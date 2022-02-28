@@ -13,9 +13,9 @@ Utility Features:
 
 1. Support for different input formats: yaml, json
 2. Generating a report in the form of:
-    1. Plain text
-    2. Stylish 
-    3. JSON
+    * Plain text
+    * Stylish 
+    * JSON
 
 Workflow badges
 1. Hexlet tests and linter status: <br>

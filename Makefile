@@ -8,4 +8,4 @@ lint:
 	npx eslint . 
 	
 reference:
-	node bin/gendiff.js -h
+	gendiff -h
