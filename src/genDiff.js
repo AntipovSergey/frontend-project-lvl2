@@ -30,7 +30,7 @@ const genDiff = (file1, file2) => {
     }
   });
 
-  console.log(`{\n${Object.entries(result).map((item) => `  ${item.join(': ')}`).join('\n')}\n}`);
+  return `{\n${Object.entries(result).map((item) => `  ${item.join(': ')}`).join('\n')}\n}`;
 };
 
 export default genDiff;
