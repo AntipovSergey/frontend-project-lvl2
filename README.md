@@ -27,5 +27,8 @@ Workflow badges
 3. Project test status: <br>
 [![Actions Status](https://github.com/AntipovSergey/frontend-project-lvl2/workflows/test-check/badge.svg)](https://github.com/AntipovSergey/frontend-project-lvl2/actions)
 
+4. Codeclimate maintainability: <br>
+[![Maintainability](https://api.codeclimate.com/v1/badges/44a65c70039907ad51d9/maintainability)](https://codeclimate.com/github/AntipovSergey/frontend-project-lvl2/maintainability)
+
 ### using the program gendiff 
 [![asciicast](https://asciinema.org/a/fOHi0FIsS33wr9XjrelLNayW3.svg)](https://asciinema.org/a/fOHi0FIsS33wr9XjrelLNayW3)
