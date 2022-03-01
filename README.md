@@ -30,5 +30,8 @@ Workflow badges
 4. Codeclimate maintainability: <br>
 [![Maintainability](https://api.codeclimate.com/v1/badges/44a65c70039907ad51d9/maintainability)](https://codeclimate.com/github/AntipovSergey/frontend-project-lvl2/maintainability)
 
+4. Codeclimate test-coverage: <br>
+[![Test Coverage](https://api.codeclimate.com/v1/badges/44a65c70039907ad51d9/test_coverage)](https://codeclimate.com/github/AntipovSergey/frontend-project-lvl2/test_coverage)
+
 ### using the program gendiff 
 [![asciicast](https://asciinema.org/a/fOHi0FIsS33wr9XjrelLNayW3.svg)](https://asciinema.org/a/fOHi0FIsS33wr9XjrelLNayW3)
