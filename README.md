@@ -33,5 +33,8 @@ Workflow badges
 4. Codeclimate test-coverage: <br>
 [![Test Coverage](https://api.codeclimate.com/v1/badges/44a65c70039907ad51d9/test_coverage)](https://codeclimate.com/github/AntipovSergey/frontend-project-lvl2/test_coverage)
 
-### using the program gendiff 
+### using the program gendiff with json-files 
 [![asciicast](https://asciinema.org/a/fOHi0FIsS33wr9XjrelLNayW3.svg)](https://asciinema.org/a/fOHi0FIsS33wr9XjrelLNayW3)
+
+### using the program gendiff with yaml-files 
+[![asciicast](https://asciinema.org/a/oSxN7PZPlHpaVbwH2ibhnSSgk.svg)](https://asciinema.org/a/oSxN7PZPlHpaVbwH2ibhnSSgk)
