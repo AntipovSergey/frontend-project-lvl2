@@ -22,10 +22,10 @@ Workflow badges
 [![Actions Status](https://github.com/AntipovSergey/frontend-project-lvl2/workflows/hexlet-check/badge.svg)](https://github.com/AntipovSergey/frontend-project-lvl2/actions)
 
 2. Project linter status: <br>
-![Actions Status](https://github.com/AntipovSergey/frontend-project-lvl2/workflows/lint-check/badge.svg)
+[![Actions Status](https://github.com/AntipovSergey/frontend-project-lvl2/workflows/lint-check/badge.svg)](https://github.com/AntipovSergey/frontend-project-lvl2/actions)
 
 3. Project test status: <br>
-![Actions Status](https://github.com/AntipovSergey/frontend-project-lvl2/workflows/test-check/badge.svg)
+[![Actions Status](https://github.com/AntipovSergey/frontend-project-lvl2/workflows/test-check/badge.svg)](https://github.com/AntipovSergey/frontend-project-lvl2/actions)
 
 ### using the program gendiff 
 [![asciicast](https://asciinema.org/a/fOHi0FIsS33wr9XjrelLNayW3.svg)](https://asciinema.org/a/fOHi0FIsS33wr9XjrelLNayW3)
