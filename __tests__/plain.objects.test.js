@@ -14,3 +14,15 @@ test('correctness of comparing flat JSON-files', () => {
   const plainFile = readFile('plain.txt');
   expect(diff).toEqual(plainFile);
 });
+
+test('requirenments for comparison flat yaml-files', () => {
+  const diff = genDiff('file1.yaml', 'file2.yaml');
+  const plainFile = readFile('plain.txt');
+  expect(diff).toEqual(plainFile);
+});
+
+test('correctness of comparing nested JSON-files', () => {
+  const diff = genDiff('file3.json', 'file4.json');
+  const nestedFile = readFile('nested.txt');
+  expect(diff).toEqual(nestedFile);
+});
