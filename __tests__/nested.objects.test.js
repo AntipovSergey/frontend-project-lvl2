@@ -9,20 +9,20 @@ const __dirname = path.dirname(__filename);
 const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
 const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8');
 
-test('correctness of comparing flat JSON-files', () => {
-  const diff = genDiff('file1.json', 'file2.json');
-  const plainFile = readFile('plain.txt');
-  expect(diff).toEqual(plainFile);
-});
-
-test('requirenments for comparison flat yaml-files', () => {
-  const diff = genDiff('file1.yaml', 'file2.yaml');
-  const plainFile = readFile('plain.txt');
-  expect(diff).toEqual(plainFile);
-});
-
 test('correctness of comparing nested JSON-files', () => {
   const diff = genDiff('file3.json', 'file4.json');
+  const nestedFile = readFile('nested.txt');
+  expect(diff).toEqual(nestedFile);
+});
+
+test('correctness of comparing nested yaml-files', () => {
+  const diff = genDiff('file3.yaml', 'file4.yaml');
+  const nestedFile = readFile('nested.txt');
+  expect(diff).toEqual(nestedFile);
+});
+
+test('correctness of comparing nested JSON-file and yaml-file', () => {
+  const diff = genDiff('file3.json', 'file4.yaml');
   const nestedFile = readFile('nested.txt');
   expect(diff).toEqual(nestedFile);
 });

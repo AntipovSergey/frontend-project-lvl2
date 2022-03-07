@@ -20,11 +20,7 @@ const calcDiff = (firstObject, secondObject) => {
       } else if (!_.has(firstObject, key) && _.has(secondObject, key)) {
         return { ...acc, [`+ ${[key]}`]: value2 };
       }
-    } if (_.has(firstObject, key) && _.has(secondObject, key)) {
-      return { ...acc, [`1 ${[key]}`]: { ...calcDiff(value1, value2) } };
-    }
-
-    return acc;
+    } return { ...acc, [`  ${[key]}`]: { ...calcDiff(value1, value2) } };
   }, {});
 
   return result;
