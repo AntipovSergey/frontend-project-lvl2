@@ -1,9 +1,7 @@
 import _ from 'lodash';
 
 const calcDiff = (firstObject, secondObject) => {
-  const keysFirst = Object.keys(firstObject);
-  const keysSecond = Object.keys(secondObject);
-  const allKeys = _.union(keysFirst, keysSecond).sort();
+  const allKeys = _.sortBy(_.union(_.keys(firstObject), _.keys(secondObject)));
 
   const result = allKeys.reduce((acc, key) => {
     const value1 = firstObject[key];
