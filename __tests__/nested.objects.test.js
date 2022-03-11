@@ -26,3 +26,21 @@ test('correctness of comparing nested JSON-file and yaml-file', () => {
   const nestedFile = readFile('nested.txt');
   expect(diff).toEqual(nestedFile);
 });
+
+test('correctness of comparing nested JSON-files', () => {
+  const diff = genDiff('file3.json', 'file4.json');
+  const nestedFile = readFile('nested.txt');
+  expect(diff).toEqual(nestedFile);
+});
+
+// test('correctness of comparing nested yaml-files', () => {
+//   const diff = genDiff('file3.yaml', 'file4.json');
+//   const nestedFile = readFile('nested.txt');
+//   expect(diff).toEqual(nestedFile);
+// });
+
+// test('correctness of comparing nested JSON-file and yaml-file in plain format', () => {
+//   const diff = genDiff('file3.json', 'file4.yaml');
+//   const nestedFile = readFile('plain.txt');
+//   expect(diff).toEqual(nestedFile);
+// });

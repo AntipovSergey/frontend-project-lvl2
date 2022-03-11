@@ -1,19 +1,17 @@
-const stylish = (value, replacer = '  ', spaceCounts = 1) => {
+import _ from 'lodash';
+
+const stringify = (obj, replacer = '  ', spaceCounts = 2) => {
   const iter = (node, depth) => {
-    if (node !== Object(node)) {
+    const indentSize = spaceCounts * depth;
+    const currentIndent = replacer.repeat(indentSize + 2);
+    const bracketIndent = replacer.repeat(indentSize);
+
+    if (!_.isObject(node)) {
       return `${node}`;
     }
-
-    const indentSize = spaceCounts * depth;
-    const currentIndent = replacer.repeat(indentSize);
-    const bracketIndent = replacer.repeat(indentSize - spaceCounts);
     const lines = Object
       .entries(node)
-      .map(([key, val]) => {
-        if (!(key.startsWith(' ') || key.startsWith('+') || key.startsWith('-'))) {
-          return `${currentIndent}${replacer}${key}: ${iter(val, depth + 2)}`;
-        } return `${currentIndent}${key}: ${iter(val, depth + 2)}`;
-      });
+      .map(([key, val]) => `${currentIndent}${key}: ${iter(val, depth + 1)}`);
     return [
       '{',
       ...lines,
@@ -21,7 +19,41 @@ const stylish = (value, replacer = '  ', spaceCounts = 1) => {
     ].join('\n');
   };
 
-  return iter(value, 1);
+  return iter(obj, 1);
+};
+
+const stylish = (data, replacer = '  ', spaceCounts = 1) => {
+  const iter = (node, depth) => {
+    const indentSize = spaceCounts * depth;
+    const currentIndent = replacer.repeat(indentSize);
+    const bracketIndent = replacer.repeat(indentSize - spaceCounts);
+    const lines = node.map(({
+      name, value, oldValue, status, children,
+    }) => {
+      if (status === 'nested') {
+        return `${currentIndent}  ${name}: ${iter(children, depth + 2)}`;
+      }
+      switch (status) {
+        case 'deleted':
+          return `${currentIndent}- ${name}: ${depth === 1 ? stringify(value) : stringify(value, '  ', 4)}`;
+        case 'unchanged':
+          return `${currentIndent}  ${name}: ${depth === 1 ? stringify(value) : stringify(value, '  ', 4)}`;
+        case 'added':
+          return `${currentIndent}+ ${name}: ${depth === 1 ? stringify(value) : stringify(value, '  ', 4)}`;
+        case 'updated':
+          return `${currentIndent}- ${name}: ${depth === 1 ? stringify(oldValue) : stringify(oldValue, '  ', 4)}\n${currentIndent}+ ${name}: ${depth === 1 ? stringify(value) : stringify(value, '  ', 4)}`;
+        default:
+          throw new Error(`There is no such ${status}`);
+      }
+    });
+    return [
+      '{',
+      ...lines,
+      `${bracketIndent}}`,
+    ].join('\n');
+  };
+
+  return iter(data, 1);
 };
 
 export default stylish;
