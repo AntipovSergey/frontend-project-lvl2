@@ -1,41 +1,40 @@
 import _ from 'lodash';
-import path from 'path';
 
 const stringify = (value) => {
-  if (value === null) {
-    return null;
-  }
-  if (typeof value === 'object') {
-    return '[complex value]';
-  }
-  if (typeof value === 'string') {
-    return `'${value}'`;
-  }
-  return value;
+  if (!_.isString(value) || value === '[complex value]') {
+    return value;
+  } return `'${value}'`;
 };
 
-const plain = (value) => {
-  console.log('--------------------------------------------------------');
-  console.log(Object.entries(value));
-  const iter = (node, depth) => {
-    if (!_.isObject(node)) {
-      return `${node}`;
-    }
-    const lines = Object
-      .entries(node)
-      .reduce((acc, [key, val]) => {
-        if (key.startsWith('+')) {
-          acc += `Property '${key.slice(2)}' was added with value: ${iter(stringify(val), depth + 1)}\n`;
-        } if (key.startsWith('-')) {
-          acc += `Property '${key.slice(2)}' was removed\n`;
-        } if (key.startsWith(' ')) {
-          acc += `Property '${key.slice(2)}' was removed\n`;
-        }
-        return acc;
-      }, '');
-    return lines;
+const plain = (data) => {
+  const iter = (node, ancestry) => {
+    const lines = node.map(({
+      name, value, oldValue, status, children,
+    }) => {
+      const formattedValue = _.isObject(value) ? '[complex value]' : value;
+      const formattedOldValue = _.isObject(oldValue) ? '[complex value]' : oldValue;
+      if (status === 'nested') {
+        return iter(children, `${ancestry}${name}.`);
+      }
+      switch (status) {
+        case 'deleted':
+          return `Property '${ancestry}${name}' was removed`;
+        case 'unchanged':
+          break;
+        case 'added':
+          return `Property '${ancestry}${name}' was added with value: ${stringify(formattedValue)}`;
+        case 'updated':
+          return `Property '${ancestry}${name}' was updated. From ${stringify(formattedOldValue)} to ${stringify(formattedValue)}`;
+        default:
+          throw new Error(`There is no such ${status}`);
+      }
+      return null;
+    });
+    return [
+      ...lines,
+    ].join('\n').replace(/\n+/g, '\n');
   };
-  return iter(value, 1);
+  return iter(data, '');
 };
 
 export default plain;

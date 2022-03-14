@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-const stringify = (obj, replacer = '  ', spaceCounts = 2) => {
+const stringify = (data, replacer = '  ', spaceCounts = 2) => {
   const iter = (node, depth) => {
     const indentSize = spaceCounts * depth;
     const currentIndent = replacer.repeat(indentSize + 2);
@@ -19,7 +19,7 @@ const stringify = (obj, replacer = '  ', spaceCounts = 2) => {
     ].join('\n');
   };
 
-  return iter(obj, 1);
+  return iter(data, 1);
 };
 
 const stylish = (data, replacer = '  ', spaceCounts = 1) => {

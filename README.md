@@ -39,5 +39,8 @@ Workflow badges
 ### using the program gendiff with plain yaml-files 
 [![asciicast](https://asciinema.org/a/oSxN7PZPlHpaVbwH2ibhnSSgk.svg)](https://asciinema.org/a/oSxN7PZPlHpaVbwH2ibhnSSgk)
 
-### using the program gendiff with nested yaml and JSON-files 
+### using the program gendiff with nested yaml and JSON-files (output in stylish format) 
 [![asciicast](https://asciinema.org/a/2z8eD5X1DpS7kcIaPzbOJefuh.svg)](https://asciinema.org/a/2z8eD5X1DpS7kcIaPzbOJefuh)
+
+### using the program gendiff with nested yaml and JSON-files (output in plain format)
+[![asciicast](https://asciinema.org/a/P0i9BcHiZ11suK84mD0yAHiPp.svg)](https://asciinema.org/a/P0i9BcHiZ11suK84mD0yAHiPp)
