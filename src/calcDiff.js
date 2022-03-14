@@ -14,9 +14,7 @@ const calcDiff = (firstObject, secondObject) => {
         return acc.concat({
           name: key, value: value2, oldValue: value1, status: 'updated',
         });
-      } if (_.isEqual(value1, value2)) {
-        return acc.concat({ name: key, value: value1, status: 'unchanged' });
-      }
+      } return acc.concat({ name: key, value: value1, status: 'unchanged' });
     } return acc.concat({ name: key, status: 'nested', children: calcDiff(value1, value2) });
   }, []);
   return result;
