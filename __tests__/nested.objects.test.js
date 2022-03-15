@@ -95,9 +95,10 @@ describe('correctness of creating diff in default format', () => {
     const result = readFile('stylish.txt');
     expect(diff).toEqual(result);
   });
-  test('default format (different files)', () => {
-    const diff = genDiff('file3.json', 'file4.yaml', 'txt');
-    const result = '';
-    expect(diff).toEqual(result);
-  });
+});
+
+test('unidentified format', () => {
+  const diff = genDiff('file3.json', 'file4.yaml', 'txt');
+  const result = '';
+  expect(diff).toEqual(result);
 });
