@@ -31,17 +31,17 @@ describe('correctness of parsing files', () => {
 describe('correctness of creating diff in different formats', () => {
   test('stylish format (only JSON-files)', () => {
     const diff = genDiff('file3.json', 'file4.json', 'stylish');
-    const result = readFile('nested.txt');
+    const result = readFile('stylish.txt');
     expect(diff).toEqual(result);
   });
   test('stylish format (only yaml-files)', () => {
     const diff = genDiff('file3.yaml', 'file4.yaml', 'stylish');
-    const result = readFile('nested.txt');
+    const result = readFile('stylish.txt');
     expect(diff).toEqual(result);
   });
   test('stylish format (different files)', () => {
     const diff = genDiff('file3.json', 'file4.yaml', 'stylish');
-    const result = readFile('nested.txt');
+    const result = readFile('stylish.txt');
     expect(diff).toEqual(result);
   });
   test('plain format (only JSON-files)', () => {
@@ -59,6 +59,23 @@ describe('correctness of creating diff in different formats', () => {
     const result = readFile('plain.txt');
     expect(diff).toEqual(result);
   });
+
+  test('JSON format (only JSON-files)', () => {
+    const diff = genDiff('file3.json', 'file4.json', 'JSON');
+    const result = readFile('json.txt');
+    expect(diff).toEqual(result);
+  });
+  test('JSON format (only yaml-files)', () => {
+    const diff = genDiff('file3.yaml', 'file4.yaml', 'JSON');
+    const result = readFile('json.txt');
+    expect(diff).toEqual(result);
+  });
+  test('JSON format (different files)', () => {
+    const diff = genDiff('file3.json', 'file4.yaml', 'JSON');
+    const result = readFile('json.txt');
+    expect(diff).toEqual(result);
+  });
+
   test('default format (only JSON-files)', () => {
     const diff = genDiff('file3.json', 'file4.json');
     const result = readFile('plain.txt');
