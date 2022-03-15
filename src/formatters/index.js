@@ -9,7 +9,7 @@ const getFormatDiff = (diff, format) => {
   if (format === 'plain') {
     return plain(diff);
   }
-  if (format === 'JSON') {
+  if (format === 'json') {
     return json(diff);
   }
 
