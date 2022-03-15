@@ -4,7 +4,8 @@ import * as yaml from 'js-yaml';
 
 const parsers = (filename) => {
   const fileExtension = path.extname(filename);
-  const file = fs.readFileSync(path.resolve(process.cwd(), '__fixtures__', filename), 'utf-8');
+  const filePath = path.resolve(process.cwd(), '__fixtures__', filename);
+  const file = fs.readFileSync(filePath, 'utf-8');
   if (fileExtension === '.json') {
     return JSON.parse(file);
   }
