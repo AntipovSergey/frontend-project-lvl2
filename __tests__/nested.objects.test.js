@@ -28,7 +28,7 @@ describe('correctness of parsing files', () => {
   });
 });
 
-describe('correctness of creating diff in different formats', () => {
+describe('correctness of creating diff in stylish format', () => {
   test('stylish format (only JSON-files)', () => {
     const diff = genDiff('file3.json', 'file4.json', 'stylish');
     const result = readFile('stylish.txt');
@@ -44,6 +44,8 @@ describe('correctness of creating diff in different formats', () => {
     const result = readFile('stylish.txt');
     expect(diff).toEqual(result);
   });
+});
+describe('correctness of creating diff in plain format', () => {
   test('plain format (only JSON-files)', () => {
     const diff = genDiff('file3.json', 'file4.json', 'plain');
     const result = readFile('plain.txt');
@@ -59,7 +61,8 @@ describe('correctness of creating diff in different formats', () => {
     const result = readFile('plain.txt');
     expect(diff).toEqual(result);
   });
-
+});
+describe('correctness of creating diff in json format', () => {
   test('JSON format (only JSON-files)', () => {
     const diff = genDiff('file3.json', 'file4.json', 'json');
     const result = readFile('json.txt');
@@ -75,7 +78,8 @@ describe('correctness of creating diff in different formats', () => {
     const result = readFile('json.txt');
     expect(diff).toEqual(result);
   });
-
+});
+describe('correctness of creating diff in default format', () => {
   test('default format (only JSON-files)', () => {
     const diff = genDiff('file3.json', 'file4.json');
     const result = readFile('stylish.txt');
