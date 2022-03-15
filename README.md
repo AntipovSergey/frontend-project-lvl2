@@ -39,11 +39,11 @@ Workflow badges
 ### using the program gendiff with plain yaml-files 
 [![asciicast](https://asciinema.org/a/oSxN7PZPlHpaVbwH2ibhnSSgk.svg)](https://asciinema.org/a/oSxN7PZPlHpaVbwH2ibhnSSgk)
 
-### using the program gendiff with nested yaml and JSON-files (output in plain format (default format))
-[![asciicast](https://asciinema.org/a/P0i9BcHiZ11suK84mD0yAHiPp.svg)](https://asciinema.org/a/P0i9BcHiZ11suK84mD0yAHiPp)
-
-### using the program gendiff with nested yaml and JSON-files (output in stylish format) 
+### using the program gendiff with nested yaml and JSON-files (output in stylish format (default format)) 
 [![asciicast](https://asciinema.org/a/HxFOO7N4MPQneoN39uWplteMe.svg)](https://asciinema.org/a/HxFOO7N4MPQneoN39uWplteMe)
+
+### using the program gendiff with nested yaml and JSON-files (output in plain format)
+[![asciicast](https://asciinema.org/a/P0i9BcHiZ11suK84mD0yAHiPp.svg)](https://asciinema.org/a/P0i9BcHiZ11suK84mD0yAHiPp)
 
 ### using the program gendiff with nested yaml and JSON-files (output in JSON format) 
 [![asciicast](https://asciinema.org/a/7ARQu091LnkKKu4nJkHoWdCbG.svg)](https://asciinema.org/a/7ARQu091LnkKKu4nJkHoWdCbG)

@@ -78,17 +78,17 @@ describe('correctness of creating diff in different formats', () => {
 
   test('default format (only JSON-files)', () => {
     const diff = genDiff('file3.json', 'file4.json');
-    const result = readFile('plain.txt');
+    const result = readFile('stylish.txt');
     expect(diff).toEqual(result);
   });
   test('default format (only yaml-files)', () => {
     const diff = genDiff('file3.yaml', 'file4.yaml');
-    const result = readFile('plain.txt');
+    const result = readFile('stylish.txt');
     expect(diff).toEqual(result);
   });
   test('default format (different files)', () => {
     const diff = genDiff('file3.json', 'file4.yaml');
-    const result = readFile('plain.txt');
+    const result = readFile('stylish.txt');
     expect(diff).toEqual(result);
   });
   test('default format (different files)', () => {
