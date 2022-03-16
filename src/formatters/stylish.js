@@ -1,6 +1,7 @@
 import _ from 'lodash';
 
-const stringify = (data, replacer = '  ', spaceCounts = 2) => {
+const stringify = (data, spaceCounts = 2) => {
+  const replacer = '  ';
   const iter = (node, depth) => {
     const indentSize = spaceCounts * depth;
     const currentIndent = replacer.repeat(indentSize + 2);
@@ -22,11 +23,18 @@ const stringify = (data, replacer = '  ', spaceCounts = 2) => {
   return iter(data, 1);
 };
 
-const stylish = (data, replacer = '  ', spaceCounts = 1) => {
+const setIndent = (treeDepth, replacerType, spaceCounts) => {
+  const indentSize = treeDepth > 1 ? (spaceCounts * treeDepth * 2) - 1 : spaceCounts * treeDepth;
+  const currentIndent = replacerType.repeat(indentSize);
+  const bracketIndent = replacerType.repeat(indentSize - spaceCounts);
+
+  return { currentIndent, bracketIndent };
+};
+
+const stylish = (data, spaceCounts = 1) => {
+  const replacer = '  ';
   const iter = (node, depth) => {
-    const indentSize = depth > 1 ? (spaceCounts * depth * 2) - 1 : spaceCounts * depth;
-    const currentIndent = replacer.repeat(indentSize);
-    const bracketIndent = replacer.repeat(indentSize - spaceCounts);
+    const { currentIndent, bracketIndent } = setIndent(depth, replacer, spaceCounts);
     const lines = node.map(({
       name, value, oldValue, status, children,
     }) => {
@@ -35,13 +43,13 @@ const stylish = (data, replacer = '  ', spaceCounts = 1) => {
       }
       switch (status) {
         case 'deleted':
-          return `${currentIndent}- ${name}: ${depth === 1 ? stringify(value) : stringify(value, '  ', 4)}`;
+          return `${currentIndent}- ${name}: ${depth === 1 ? stringify(value) : stringify(value, 4)}`;
         case 'unchanged':
-          return `${currentIndent}  ${name}: ${depth === 1 ? stringify(value) : stringify(value, '  ', 4)}`;
+          return `${currentIndent}  ${name}: ${depth === 1 ? stringify(value) : stringify(value, 4)}`;
         case 'added':
-          return `${currentIndent}+ ${name}: ${depth === 1 ? stringify(value) : stringify(value, '  ', 4)}`;
+          return `${currentIndent}+ ${name}: ${depth === 1 ? stringify(value) : stringify(value, 4)}`;
         case 'updated':
-          return `${currentIndent}- ${name}: ${depth === 1 ? stringify(oldValue) : stringify(oldValue, '  ', 4)}\n${currentIndent}+ ${name}: ${depth === 1 ? stringify(value) : stringify(value, '  ', 4)}`;
+          return `${currentIndent}- ${name}: ${depth === 1 ? stringify(oldValue) : stringify(oldValue, 4)}\n${currentIndent}+ ${name}: ${depth === 1 ? stringify(value) : stringify(value, 4)}`;
         default:
           throw new Error(`There is no such ${status}`);
       }
