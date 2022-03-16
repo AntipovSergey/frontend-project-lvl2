@@ -3,7 +3,7 @@ import * as path from 'path';
 import * as fs from 'fs';
 import { fileURLToPath } from 'url';
 import * as yaml from 'js-yaml';
-import genDiff from '../src/genDiff.js';
+import genDiff from '../index.js';
 import parsers from '../src/parsers.js';
 
 const __filename = fileURLToPath(import.meta.url);

@@ -1,6 +1,6 @@
-import parsers from './parsers.js';
-import getFormatDiff from './formatters/index.js';
-import calcDiff from './calcDiff.js';
+import parsers from './src/parsers.js';
+import getFormatDiff from './src/formatters/index.js';
+import calcDiff from './src/calcDiff.js';
 
 const genDiff = (file1, file2, format = 'stylish') => {
   const firstObject = parsers(file1);
