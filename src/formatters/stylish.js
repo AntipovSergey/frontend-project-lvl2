@@ -24,14 +24,14 @@ const stringify = (data, replacer = '  ', spaceCounts = 2) => {
 
 const stylish = (data, replacer = '  ', spaceCounts = 1) => {
   const iter = (node, depth) => {
-    const indentSize = spaceCounts * depth;
+    const indentSize = depth > 1 ? (spaceCounts * depth * 2) - 1 : spaceCounts * depth;
     const currentIndent = replacer.repeat(indentSize);
     const bracketIndent = replacer.repeat(indentSize - spaceCounts);
     const lines = node.map(({
       name, value, oldValue, status, children,
     }) => {
       if (status === 'nested') {
-        return `${currentIndent}  ${name}: ${iter(children, depth + 2)}`;
+        return `${currentIndent}  ${name}: ${iter(children, depth + 1)}`;
       }
       switch (status) {
         case 'deleted':
