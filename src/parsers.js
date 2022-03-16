@@ -4,14 +4,15 @@ import * as yaml from 'js-yaml';
 const parseFile = (filename, data) => {
   const fileExtension = path.extname(filename);
 
-  if (fileExtension === '.json') {
-    return JSON.parse(data);
+  switch (fileExtension) {
+    case '.json':
+      return JSON.parse(data);
+    case '.yml':
+    case '.yaml':
+      return yaml.load(data);
+    default:
+      throw new Error(`Unknown file extention '${fileExtension}'!`);
   }
-  if (fileExtension === '.yml' || fileExtension === '.yaml') {
-    return yaml.load(data);
-  }
-
-  return null;
 };
 
 export default parseFile;

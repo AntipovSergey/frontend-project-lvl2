@@ -24,9 +24,12 @@ describe('correctness of parsing files', () => {
     const trueValue = JSON.parse(readFile('file4.json'));
     expect(parsedData).toEqual(trueValue);
   });
-  test('correctness of parsing', () => {
-    const parsedData = parseFile('file4.txt');
-    expect(parsedData).toBe(null);
+  test('throws on octopus', () => {
+    const dataExtention = path.extname('file4.txt');
+    function parseDataWithUnexistingExtention() {
+      parseFile('file4.txt');
+    }
+    expect(parseDataWithUnexistingExtention).toThrowError(`Unknown file extention '${dataExtention}'!`);
   });
 });
 
