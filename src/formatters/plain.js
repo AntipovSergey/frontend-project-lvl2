@@ -9,7 +9,11 @@ const stringify = (value) => {
 const plain = (data) => {
   const iter = (node, ancestry) => {
     const lines = node.map(({
-      name, value, oldValue, status, children,
+      name,
+      value,
+      oldValue = null,
+      status,
+      children = null,
     }) => {
       const formattedValue = _.isObject(value) ? '[complex value]' : value;
       const formattedOldValue = _.isObject(oldValue) ? '[complex value]' : oldValue;
