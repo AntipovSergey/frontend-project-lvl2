@@ -44,18 +44,22 @@ const stylish = (data, spaceCounts = 1) => {
     const lines = node.map(({
       name, value, oldValue, status, children,
     }) => {
+      const getCurrentValue = (currentDepth, currentValue) => {
+        const result = currentDepth === 1 ? stringify(currentValue) : stringify(currentValue, 4);
+        return result;
+      };
       if (status === 'nested') {
         return `${currentIndent}  ${name}: ${iter(children, depth + 1)}`;
       }
       switch (status) {
         case 'deleted':
-          return `${currentIndent}- ${name}: ${depth === 1 ? stringify(value) : stringify(value, 4)}`;
+          return `${currentIndent}- ${name}: ${getCurrentValue(depth, value)}`;
         case 'unchanged':
-          return `${currentIndent}  ${name}: ${depth === 1 ? stringify(value) : stringify(value, 4)}`;
+          return `${currentIndent}  ${name}: ${getCurrentValue(depth, value)}`;
         case 'added':
-          return `${currentIndent}+ ${name}: ${depth === 1 ? stringify(value) : stringify(value, 4)}`;
+          return `${currentIndent}+ ${name}: ${getCurrentValue(depth, value)}`;
         case 'updated':
-          return `${currentIndent}- ${name}: ${depth === 1 ? stringify(oldValue) : stringify(oldValue, 4)}\n${currentIndent}+ ${name}: ${depth === 1 ? stringify(value) : stringify(value, 4)}`;
+          return `${currentIndent}- ${name}: ${getCurrentValue(depth, oldValue)}\n${currentIndent}+ ${name}: ${getCurrentValue(depth, value)}`;
         default:
           throw new Error(`There is no such ${status}`);
       }
