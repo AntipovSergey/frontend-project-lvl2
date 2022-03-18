@@ -14,10 +14,10 @@ const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8'
 
 describe('correctness of parsing files', () => {
   test.each([
-    { data: 'file2.yaml', extention: 'yaml-file' },
-    { data: 'file2.yml', extention: 'yaml-file' },
-    { data: 'file2.json', extention: 'JSON-file' },
-  ])('correctness of parsing $extention', ({ data }) => {
+    ['yaml-file', 'file2.yaml'],
+    ['yml-file', 'file2.yml'],
+    ['JSON-file', 'file2.json'],
+  ])('correctness of parsing %s', (format, data) => {
     const dataContent = readFile(data);
     const fileExtention = getFileExtention(data);
     const parsedData = parseFile(fileExtention, dataContent);
@@ -34,114 +34,44 @@ describe('correctness of parsing files', () => {
   });
 });
 
-describe('correctness of creating diff in stylish format', () => {
-  test.each([
-    {
-      data1: '__fixtures__/file1.json',
-      data2: '__fixtures__/file2.json',
-      extention: 'only JSON-files',
-      sample: 'stylish.txt',
-    },
-    {
-      data1: '__fixtures__/file1.yaml',
-      data2: '__fixtures__/file2.yaml',
-      extention: 'only yaml-files',
-      sample: 'stylish.txt',
-    },
-    {
-      data1: '__fixtures__/file1.json',
-      data2: '__fixtures__/file2.yaml',
-      extention: 'different files',
-      sample: 'stylish.txt',
-    },
-  ])('stylish format ($extention)', ({ data1, data2, sample }) => {
-    const diff = genDiff(data1, data2, 'stylish');
-    const result = readFile(sample);
-    expect(diff).toEqual(result);
+describe('correctness of creating diff in different formats', () => {
+  describe.each([
+    ['stylish', 'stylish.txt'],
+    ['plain', 'plain.txt'],
+    ['json', 'json.txt'],
+  ])('diff in %s format', (format, sample) => {
+    const expectedValue = readFile(sample);
+    test.each([
+      ['json', 'json'],
+      ['yaml', 'yaml'],
+      ['json', 'yaml'],
+    ])('compare %s with %s', (format1, format2) => {
+      const actualValue = genDiff(
+        `__fixtures__/file1.${format1}`,
+        `__fixtures__/file2.${format2}`,
+        format,
+      );
+      expect(actualValue).toEqual(expectedValue);
+    });
   });
-});
-describe('correctness of creating diff in plain format', () => {
-  test.each([
-    {
-      data1: '__fixtures__/file1.json',
-      data2: '__fixtures__/file2.json',
-      extention: 'only JSON-files',
-      sample: 'plain.txt',
-    },
-    {
-      data1: '__fixtures__/file1.yaml',
-      data2: '__fixtures__/file2.yaml',
-      extention: 'only yaml-files',
-      sample: 'plain.txt',
-    },
-    {
-      data1: '__fixtures__/file1.json',
-      data2: '__fixtures__/file2.yaml',
-      extention: 'different files',
-      sample: 'plain.txt',
-    },
-  ])('plain format ($extention)', ({ data1, data2, sample }) => {
-    const diff = genDiff(data1, data2, 'plain');
-    const result = readFile(sample);
-    expect(diff).toEqual(result);
+  describe('diff in default format', () => {
+    test.each([
+      ['json', 'json'],
+      ['yaml', 'yaml'],
+      ['json', 'yaml'],
+    ])('compare %s with %s', (format1, format2) => {
+      const actualValue = genDiff(
+        `__fixtures__/file1.${format1}`,
+        `__fixtures__/file2.${format2}`,
+      );
+      const expectedValue = readFile('stylish.txt');
+      expect(actualValue).toEqual(expectedValue);
+    });
   });
-});
-describe('correctness of creating diff in json format', () => {
-  test.each([
-    {
-      data1: '__fixtures__/file1.json',
-      data2: '__fixtures__/file2.json',
-      extention: 'only JSON-files',
-      sample: 'json.txt',
-    },
-    {
-      data1: '__fixtures__/file1.yaml',
-      data2: '__fixtures__/file2.yaml',
-      extention: 'only yaml-files',
-      sample: 'json.txt',
-    },
-    {
-      data1: '__fixtures__/file1.json',
-      data2: '__fixtures__/file2.yaml',
-      extention: 'different files',
-      sample: 'json.txt',
-    },
-  ])('json format ($extention)', ({ data1, data2, sample }) => {
-    const diff = genDiff(data1, data2, 'json');
-    const result = readFile(sample);
-    expect(diff).toEqual(result);
+  test('unidentified format', () => {
+    function parseDataWithUnexistingFormat() {
+      genDiff('__fixtures__/file1.json', '__fixtures__/file2.yaml', 'txt');
+    }
+    expect(parseDataWithUnexistingFormat).toThrowError('Unknown format');
   });
-});
-describe('correctness of creating diff in default format', () => {
-  test.each([
-    {
-      data1: '__fixtures__/file1.json',
-      data2: '__fixtures__/file2.json',
-      extention: 'only JSON-files',
-      sample: 'stylish.txt',
-    },
-    {
-      data1: '__fixtures__/file1.yaml',
-      data2: '__fixtures__/file2.yaml',
-      extention: 'only yaml-files',
-      sample: 'stylish.txt',
-    },
-    {
-      data1: '__fixtures__/file1.json',
-      data2: '__fixtures__/file2.yaml',
-      extention: 'different files',
-      sample: 'stylish.txt',
-    },
-  ])('default format ($extention)', ({ data1, data2, sample }) => {
-    const diff = genDiff(data1, data2);
-    const result = readFile(sample);
-    expect(diff).toEqual(result);
-  });
-});
-
-test('unidentified format', () => {
-  function parseDataWithUnexistingFormat() {
-    genDiff('__fixtures__/file1.json', '__fixtures__/file2.yaml', 'txt');
-  }
-  expect(parseDataWithUnexistingFormat).toThrowError('Unknown format');
 });
