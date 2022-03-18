@@ -3,17 +3,16 @@ import plain from './plain.js';
 import json from './json.js';
 
 const getFormatDiff = (diff, format) => {
-  if (format === 'stylish') {
-    return stylish(diff);
+  switch (format) {
+    case 'stylish':
+      return stylish(diff);
+    case 'plain':
+      return plain(diff);
+    case 'json':
+      return json(diff);
+    default:
+      throw new Error(`Unknown format '${format}'!`);
   }
-  if (format === 'plain') {
-    return plain(diff);
-  }
-  if (format === 'json') {
-    return json(diff);
-  }
-
-  return '';
 };
 
 export default getFormatDiff;

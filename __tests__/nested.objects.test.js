@@ -140,7 +140,8 @@ describe('correctness of creating diff in default format', () => {
 });
 
 test('unidentified format', () => {
-  const diff = genDiff('__fixtures__/file1.json', '__fixtures__/file2.yaml', 'txt');
-  const result = '';
-  expect(diff).toEqual(result);
+  function parseDataWithUnexistingFormat() {
+    genDiff('__fixtures__/file1.json', '__fixtures__/file2.yaml', 'txt');
+  }
+  expect(parseDataWithUnexistingFormat).toThrowError('Unknown format');
 });
