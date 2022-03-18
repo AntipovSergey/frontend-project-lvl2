@@ -61,7 +61,7 @@ const stylish = (data, spaceCounts = 1) => {
         case 'updated':
           return `${currentIndent}- ${name}: ${getCurrentValue(depth, oldValue)}\n${currentIndent}+ ${name}: ${getCurrentValue(depth, value)}`;
         default:
-          throw new Error(`There is no such ${status}`);
+          throw new Error(`There is no such status ${status}`);
       }
     });
     return [
