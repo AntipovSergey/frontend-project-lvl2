@@ -1,9 +1,6 @@
-import * as path from 'path';
 import * as yaml from 'js-yaml';
 
-const parseFile = (filename, data) => {
-  const fileExtension = path.extname(filename);
-
+const parseFile = (fileExtension, data) => {
   switch (fileExtension) {
     case '.json':
       return JSON.parse(data);
