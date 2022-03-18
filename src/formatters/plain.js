@@ -17,10 +17,9 @@ const plain = (data) => {
     }) => {
       const formattedValue = _.isObject(value) ? '[complex value]' : value;
       const formattedOldValue = _.isObject(oldValue) ? '[complex value]' : oldValue;
-      if (status === 'nested') {
-        return iter(children, `${ancestry}${name}.`);
-      }
       switch (status) {
+        case 'nested':
+          return iter(children, `${ancestry}${name}.`);
         case 'deleted':
           return `Property '${ancestry}${name}' was removed`;
         case 'unchanged':
@@ -30,7 +29,7 @@ const plain = (data) => {
         case 'updated':
           return `Property '${ancestry}${name}' was updated. From ${stringify(formattedOldValue)} to ${stringify(formattedValue)}`;
         default:
-          throw new Error(`There is no such ${status}`);
+          throw new Error(`There is no such status: ${status}`);
       }
       return null;
     });
