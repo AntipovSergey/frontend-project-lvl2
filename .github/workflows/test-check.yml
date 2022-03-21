@@ -12,9 +12,6 @@ jobs:
       - name: npm install
         run: 
           make install
-      - name: run test
-        run: 
-          make test
       - name: code coverage 
         uses:  paambaati/codeclimate-action@v2.5.7
         env:
