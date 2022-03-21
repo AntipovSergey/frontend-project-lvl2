@@ -1,14 +1,14 @@
 import * as yaml from 'js-yaml';
 
-const parseFile = (fileExtension, data) => {
-  switch (fileExtension) {
+const parseFile = (parcingFormat, data) => {
+  switch (parcingFormat) {
     case '.json':
       return JSON.parse(data);
     case '.yml':
     case '.yaml':
       return yaml.load(data);
     default:
-      throw new Error(`Unknown file extention '${fileExtension}'!`);
+      throw new Error(`Unknown file extention '${parcingFormat}'!`);
   }
 };
 
