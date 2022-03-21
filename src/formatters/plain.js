@@ -1,9 +1,10 @@
 import _ from 'lodash';
 
 const stringify = (value) => {
-  if (!_.isString(value) || value === '[complex value]') {
-    return value;
-  } return `'${value}'`;
+  const formattedValue = _.isObject(value) ? '[complex value]' : value;
+  if (_.isString(value)) {
+    return `'${value}'`;
+  } return formattedValue;
 };
 
 const plain = (data) => {
@@ -15,10 +16,6 @@ const plain = (data) => {
       status,
       children = null,
     }) => {
-      const formattedValue = _.isObject(value) ? '[complex value]' : value;
-
-      const formattedOldValue = _.isObject(oldValue) ? '[complex value]' : oldValue;
-
       switch (status) {
         case 'nested':
           return iter(children, `${ancestry}${name}.`);
@@ -27,9 +24,9 @@ const plain = (data) => {
         case 'unchanged':
           break;
         case 'added':
-          return `Property '${ancestry}${name}' was added with value: ${stringify(formattedValue)}`;
+          return `Property '${ancestry}${name}' was added with value: ${stringify(value)}`;
         case 'updated':
-          return `Property '${ancestry}${name}' was updated. From ${stringify(formattedOldValue)} to ${stringify(formattedValue)}`;
+          return `Property '${ancestry}${name}' was updated. From ${stringify(oldValue)} to ${stringify(value)}`;
         default:
           throw new Error(`There is no such status: ${status}`);
       }
