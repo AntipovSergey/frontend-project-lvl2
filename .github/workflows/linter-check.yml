@@ -10,8 +10,8 @@ jobs:
         node-version: '16.x'
         cache: npm
     - name: npm install
-      run: 
+      run:
         make install
     - name: run linter
-      run: 
+      run:
         make lint

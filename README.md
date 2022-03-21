@@ -5,7 +5,7 @@
 
 ### About the project
 
-Gendiff is a program that determines the difference between two data structures. 
+Gendiff is a program that determines the difference between two data structures.
 
 This is a popular task, for which there are many online services, for example http://www.jsondiff.com /. A similar mechanism is used when outputting tests or when automatically tracking changes in configuration files.
 
@@ -14,7 +14,7 @@ Utility Features:
 1. Support for different input formats: yaml, json
 2. Generating a report in the form of:
     * plain text
-    * stylish 
+    * stylish
     * JSON
 
 Workflow badges
@@ -33,17 +33,17 @@ Workflow badges
 4. Codeclimate test-coverage: <br>
 [![Test Coverage](https://api.codeclimate.com/v1/badges/44a65c70039907ad51d9/test_coverage)](https://codeclimate.com/github/AntipovSergey/frontend-project-lvl2/test_coverage)
 
-### using the program gendiff with plain json-files 
+### using the program gendiff with plain json-files
 [![asciicast](https://asciinema.org/a/3b9FLymwyGoAAGVt3eHRXmt7V.svg)](https://asciinema.org/a/3b9FLymwyGoAAGVt3eHRXmt7V)
 
-### using the program gendiff with plain yaml-files 
+### using the program gendiff with plain yaml-files
 [![asciicast](https://asciinema.org/a/HGYjxBFFhq0wBNgykbNUrVb3i.svg)](https://asciinema.org/a/HGYjxBFFhq0wBNgykbNUrVb3i)
 
-### using the program gendiff with nested yaml and JSON-files (output in stylish format (default format)) 
+### using the program gendiff with nested yaml and JSON-files (output in stylish format (default format))
 [![asciicast](https://asciinema.org/a/OX7zAjd01rSVVjJYuWiGHDHNB.svg)](https://asciinema.org/a/OX7zAjd01rSVVjJYuWiGHDHNB)
 
 ### using the program gendiff with nested yaml and JSON-files (output in plain format)
 [![asciicast](https://asciinema.org/a/NzSqpUCoupKTfJv7v3WjJQTSz.svg)](https://asciinema.org/a/NzSqpUCoupKTfJv7v3WjJQTSz)
 
-### using the program gendiff with nested yaml and JSON-files (output in JSON format) 
+### using the program gendiff with nested yaml and JSON-files (output in JSON format)
 [![asciicast](https://asciinema.org/a/j3Bkqs47GlFkTrMG1EJODlZo9.svg)](https://asciinema.org/a/j3Bkqs47GlFkTrMG1EJODlZo9)

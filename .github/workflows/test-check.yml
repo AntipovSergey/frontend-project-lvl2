@@ -10,9 +10,9 @@ jobs:
           node-version: '16.x'
           cache: npm
       - name: npm install
-        run: 
+        run:
           make install
-      - name: code coverage 
+      - name: code coverage
         uses:  paambaati/codeclimate-action@v2.5.7
         env:
             CC_TEST_REPORTER_ID: ${{ secrets.CODECLIMATE_ID }}
