@@ -16,7 +16,9 @@ const plain = (data) => {
       children = null,
     }) => {
       const formattedValue = _.isObject(value) ? '[complex value]' : value;
+
       const formattedOldValue = _.isObject(oldValue) ? '[complex value]' : oldValue;
+
       switch (status) {
         case 'nested':
           return iter(children, `${ancestry}${name}.`);

@@ -2,9 +2,12 @@ import _ from 'lodash';
 
 const calcDiff = (firstObject, secondObject) => {
   const allKeys = _.sortBy(_.union(_.keys(firstObject), _.keys(secondObject)));
+
   const result = allKeys.map((key) => {
     const value1 = firstObject[key];
+
     const value2 = secondObject[key];
+
     if (!(_.isObject(value1) && _.isObject(value2))) {
       if (!_.has(firstObject, key)) {
         return { name: key, value: value2, status: 'added' };
