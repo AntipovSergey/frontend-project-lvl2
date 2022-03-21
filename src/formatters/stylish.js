@@ -10,11 +10,11 @@ const setStringifyIndent = (treeDepth, replacerType, spaceCounts) => {
   return { currentIndent, bracketIndent };
 };
 
-const stringify = (data, spaceCounts = 2) => {
+const stringify = (data, depth, spaceCounts = 2) => {
   const replacer = '  ';
 
-  const iter = (node, depth) => {
-    const { currentIndent, bracketIndent } = setStringifyIndent(depth, replacer, spaceCounts);
+  const iter = (node, innerDepth) => {
+    const { currentIndent, bracketIndent } = setStringifyIndent(innerDepth, replacer, spaceCounts);
 
     if (!_.isObject(node)) {
       return `${node}`;
@@ -22,7 +22,7 @@ const stringify = (data, spaceCounts = 2) => {
 
     const lines = Object
       .entries(node)
-      .map(([key, val]) => `${currentIndent}${key}: ${iter(val, depth + 1)}`);
+      .map(([key, val]) => `${currentIndent}${key}: ${iter(val, innerDepth + 1)}`);
     return [
       '{',
       ...lines,
@@ -30,7 +30,7 @@ const stringify = (data, spaceCounts = 2) => {
     ].join('\n');
   };
 
-  return iter(data, 1);
+  return iter(data, depth);
 };
 
 const setStylishIndent = (treeDepth, replacerType, spaceCounts) => {
@@ -52,22 +52,18 @@ const stylish = (data, spaceCounts = 1) => {
     const lines = node.map(({
       name, value, oldValue, status, children,
     }) => {
-      const getCurrentValue = (currentDepth, currentValue) => {
-        const result = currentDepth === 1 ? stringify(currentValue) : stringify(currentValue, 4);
-        return result;
-      };
       if (status === 'nested') {
         return `${currentIndent}  ${name}: ${iter(children, depth + 1)}`;
       }
       switch (status) {
         case 'deleted':
-          return `${currentIndent}- ${name}: ${getCurrentValue(depth, value)}`;
+          return `${currentIndent}- ${name}: ${stringify(value, depth)}`;
         case 'unchanged':
-          return `${currentIndent}  ${name}: ${getCurrentValue(depth, value)}`;
+          return `${currentIndent}  ${name}: ${stringify(value, depth)}`;
         case 'added':
-          return `${currentIndent}+ ${name}: ${getCurrentValue(depth, value)}`;
+          return `${currentIndent}+ ${name}: ${stringify(value, depth)}`;
         case 'updated':
-          return `${currentIndent}- ${name}: ${getCurrentValue(depth, oldValue)}\n${currentIndent}+ ${name}: ${getCurrentValue(depth, value)}`;
+          return `${currentIndent}- ${name}: ${stringify(oldValue, depth)}\n${currentIndent}+ ${name}: ${stringify(value, depth)}`;
         default:
           throw new Error(`There is no such status ${status}`);
       }
