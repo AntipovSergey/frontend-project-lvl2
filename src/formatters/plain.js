@@ -37,7 +37,7 @@ const plain = (data) => {
     });
     return [
       ...lines,
-    ].join('\n').replace(/\n+/g, '\n');
+    ].filter((item) => item !== null).join('\n');
   };
   return iter(data, '');
 };
