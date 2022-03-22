@@ -1,20 +1,27 @@
 import _ from 'lodash';
 
-const setStringifyIndent = (treeDepth, replacerType, spaceCounts) => {
-  const indentSize = spaceCounts * treeDepth;
+const setIndent = (treeDepth, spaceCounts) => {
+  const replacer = '  ';
 
-  const currentIndent = replacerType.repeat(indentSize + 2);
+  const indentSize = treeDepth > 1 ? (spaceCounts * treeDepth * 2) - 1 : spaceCounts * treeDepth;
+  const currentIndent = replacer.repeat(indentSize);
+  const bracketIndent = replacer.repeat(indentSize - spaceCounts);
 
-  const bracketIndent = replacerType.repeat(indentSize);
+  const innerIndentSize = spaceCounts * treeDepth;
+  const innerCurrentIndent = replacer.repeat(innerIndentSize + 2);
+  const innerBracketIndent = replacer.repeat(innerIndentSize);
 
-  return { currentIndent, bracketIndent };
+  return {
+    currentIndent,
+    bracketIndent,
+    innerCurrentIndent,
+    innerBracketIndent,
+  };
 };
 
 const stringify = (data, depth, spaceCounts = 2) => {
-  const replacer = '  ';
-
   const iter = (node, innerDepth) => {
-    const { currentIndent, bracketIndent } = setStringifyIndent(innerDepth, replacer, spaceCounts);
+    const { innerCurrentIndent, innerBracketIndent } = setIndent(innerDepth, spaceCounts);
 
     if (!_.isObject(node)) {
       return `${node}`;
@@ -22,32 +29,20 @@ const stringify = (data, depth, spaceCounts = 2) => {
 
     const lines = Object
       .entries(node)
-      .map(([key, val]) => `${currentIndent}${key}: ${iter(val, innerDepth + 1)}`);
+      .map(([key, val]) => `${innerCurrentIndent}${key}: ${iter(val, innerDepth + 1)}`);
     return [
       '{',
       ...lines,
-      `${bracketIndent}}`,
+      `${innerBracketIndent}}`,
     ].join('\n');
   };
 
   return iter(data, depth);
 };
 
-const setStylishIndent = (treeDepth, replacerType, spaceCounts) => {
-  const indentSize = treeDepth > 1 ? (spaceCounts * treeDepth * 2) - 1 : spaceCounts * treeDepth;
-
-  const currentIndent = replacerType.repeat(indentSize);
-
-  const bracketIndent = replacerType.repeat(indentSize - spaceCounts);
-
-  return { currentIndent, bracketIndent };
-};
-
 const stylish = (data, spaceCounts = 1) => {
-  const replacer = '  ';
-
   const iter = (node, depth) => {
-    const { currentIndent, bracketIndent } = setStylishIndent(depth, replacer, spaceCounts);
+    const { currentIndent, bracketIndent } = setIndent(depth, spaceCounts);
 
     const lines = node.map(({
       name, value, oldValue, status, children,

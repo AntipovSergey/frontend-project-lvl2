@@ -30,7 +30,7 @@ describe('correctness of parsing files', () => {
       const dataContent = readFile('file2.txt');
       parseFile(fileExtention, dataContent);
     }
-    expect(parseDataWithUnexistingExtention).toThrowError(`Unknown file extention '${fileExtention}'!`);
+    expect(parseDataWithUnexistingExtention).toThrowError(`Unknown parcing format: '${fileExtention}'!`);
   });
 });
 
