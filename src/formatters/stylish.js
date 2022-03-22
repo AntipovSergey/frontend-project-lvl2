@@ -20,10 +20,8 @@ const setIndent = (treeDepth, spaceCounts) => {
 };
 
 const stringify = (data, depth) => {
-  const spaceCounts = 2;
-
   const iter = (node, innerDepth) => {
-    const { currentIndent, bracketIndent } = setIndent(innerDepth, spaceCounts);
+    const { currentIndent, bracketIndent } = setIndent(innerDepth, 2);
 
     if (!_.isObject(node)) {
       return `${node}`;
@@ -43,10 +41,8 @@ const stringify = (data, depth) => {
 };
 
 const stylish = (data) => {
-  const spaceCounts = 1;
-
   const iter = (node, depth) => {
-    const { currentIndent, bracketIndent } = setIndent(depth, spaceCounts);
+    const { currentIndent, bracketIndent } = setIndent(depth, 1);
 
     const lines = node.map(({
       name, value, oldValue, status, children,
