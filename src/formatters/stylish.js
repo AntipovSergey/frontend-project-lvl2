@@ -4,7 +4,7 @@ const setIndent = (treeDepth, spaceCounts) => {
   const replacer = '  ';
 
   if (spaceCounts === 1) {
-    const indentSize = treeDepth > 1 ? (spaceCounts * treeDepth * 2) - 1 : spaceCounts * treeDepth;
+    const indentSize = treeDepth > 1 ? (treeDepth * 2) - 1 : treeDepth;
 
     const currentIndent = replacer.repeat(indentSize);
     const bracketIndent = replacer.repeat(indentSize - spaceCounts);
